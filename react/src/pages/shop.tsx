@@ -1,11 +1,19 @@
 import Item from '@/components/item';
 import Spinner from '@/components/spinner';
+import { useAppDispatch } from '@/hooks/store-hooks';
 import { ItemModel } from '@/models/item.model';
+import { cartActions } from '@/store/slices/cart.slice';
 import { useEffect, useState } from 'react';
 
 const ShopPage = () => {
   const [items, setItems] = useState<ItemModel[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const dispatch = useAppDispatch();
+
+  const handleAddItemToCart = (item: ItemModel) => {
+    dispatch(cartActions.addItem(item));
+  };
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -35,7 +43,13 @@ const ShopPage = () => {
         ) : items.length === 0 ? (
           <p>No items found!</p>
         ) : (
-          items.map((item: ItemModel) => <Item key={item.id} {...item} />)
+          items.map((item: ItemModel) => (
+            <Item
+              key={item.id}
+              {...item}
+              onAddToCart={() => handleAddItemToCart(item)}
+            />
+          ))
         )}
       </div>
     </div>

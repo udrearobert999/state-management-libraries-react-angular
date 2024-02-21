@@ -1,15 +1,21 @@
 import Button from '@/components/button';
 import CartItem from '@/components/cart-item';
 import Checkout from '@/components/checkout';
-import { useAppSelector } from '@/hooks/store-hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/store-hooks';
+import { cartActions } from '@/store/slices/cart.slice';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
   const navigate = useNavigate();
   const itemsInCart = useAppSelector((state) => state.cart.items);
+  const dispatch = useAppDispatch();
 
   const handleBack = () => {
     navigate('/');
+  };
+
+  const handleClear = () => {
+    dispatch(cartActions.clear());
   };
 
   return (
@@ -29,7 +35,12 @@ const CartPage = () => {
       )}
       <div className="flex w-full flex-col items-center justify-center gap-4">
         {itemsInCart.length > 0 && (
-          <Button className="w-3/12 bg-red-600 hover:bg-red-700">Clear</Button>
+          <Button
+            onClick={handleClear}
+            className="w-3/12 bg-red-600 hover:bg-red-700"
+          >
+            Clear
+          </Button>
         )}
         <Button onClick={handleBack} className="w-3/12">
           Back

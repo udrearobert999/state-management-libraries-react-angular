@@ -1,13 +1,11 @@
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import Spinner from './spinner';
 
 import { cn } from '@/utils';
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  className?: string;
   isLoading?: boolean;
-  onClick?: () => void;
 }
 
 const Button = ({ children, className, isLoading, onClick }: ButtonProps) => {
@@ -19,7 +17,7 @@ const Button = ({ children, className, isLoading, onClick }: ButtonProps) => {
 
   return (
     <button disabled={isLoading} onClick={onClick} className={buttonClass}>
-      {isLoading ? <Spinner className='fill-gray-200' /> : children}
+      {isLoading ? <Spinner className="fill-gray-200" /> : children}
     </button>
   );
 };

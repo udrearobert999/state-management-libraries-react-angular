@@ -16,11 +16,17 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ItemModel>) => {
-      console.log(state, action);
+      const newItem = action.payload;
+
+      state.items.push(newItem);
     },
 
     removeItem: (state, action: PayloadAction<number>) => {
       console.log(state, action);
+    },
+
+    clear: (state) => {
+      state.items = [];
     },
   },
 });

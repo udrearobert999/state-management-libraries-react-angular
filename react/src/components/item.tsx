@@ -2,9 +2,11 @@ import { ItemModel } from '@/models/item.model';
 import Button from './button';
 import Quantity from './quantity';
 
-interface ItemProps extends ItemModel {}
+interface ItemProps extends ItemModel {
+  onAddToCart: () => void;
+}
 
-const Item = ({ title, description, price }: ItemProps) => {
+const Item = ({ title, description, price, onAddToCart }: ItemProps) => {
   const formattedPrice = parseFloat(price).toFixed(2);
 
   return (
@@ -18,7 +20,7 @@ const Item = ({ title, description, price }: ItemProps) => {
       <p className="text-center text-2xl font-bold">$ {formattedPrice}</p>
       <div className="flex w-full gap-4">
         <Quantity />
-        <Button>Add</Button>
+        <Button onClick={() => onAddToCart()}>Add</Button>
       </div>
     </div>
   );
