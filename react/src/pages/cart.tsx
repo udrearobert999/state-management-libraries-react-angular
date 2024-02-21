@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const itemsInCart = useAppSelector((state) => state.cart.items);
+  const { items: itemsInCart, totalPrice } = useAppSelector(
+    (state) => state.cart,
+  );
   const dispatch = useAppDispatch();
 
   const handleBack = () => {
@@ -28,10 +30,10 @@ const CartPage = () => {
               <CartItem key={item.id} {...item} />
             ))}
           </div>
-          <Checkout />
+          <Checkout totalPrice={totalPrice} />
         </div>
       ) : (
-        <p>The cart is empty :(</p>
+        <p>The cart is empty!</p>
       )}
       <div className="flex w-full flex-col items-center justify-center gap-4">
         {itemsInCart.length > 0 && (

@@ -4,4 +4,5 @@ export interface ItemModel {
   description: string;
   shortDescription: string;
   price: string;
+  quantity?: number;
 }

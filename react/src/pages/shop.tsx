@@ -11,8 +11,8 @@ const ShopPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleAddItemToCart = (item: ItemModel) => {
-    dispatch(cartActions.addItem(item));
+  const handleAddItemToCart = (item: ItemModel, quantity: number) => {
+    dispatch(cartActions.addItem({ ...item, quantity }));
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const ShopPage = () => {
             <Item
               key={item.id}
               {...item}
-              onAddToCart={() => handleAddItemToCart(item)}
+              onAddToCart={(quantity) => handleAddItemToCart(item, quantity)}
             />
           ))
         )}

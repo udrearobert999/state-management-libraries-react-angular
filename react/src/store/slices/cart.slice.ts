@@ -1,24 +1,34 @@
 import { ItemModel } from '@/models/item.model';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+interface ItemWithQuantity extends ItemModel {
+  quantity: number;
+}
+
 interface CartState {
-  items: ItemModel[];
+  items: ItemWithQuantity[];
   totalPrice: number;
 }
 
 const initialState: CartState = {
   items: [],
-  totalPrice: 0,
+  totalPrice: 0.0,
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<ItemModel>) => {
+    addItem: (state, action: PayloadAction<ItemWithQuantity>) => {
       const newItem = action.payload;
+      const existingItem = state.items.find((item) => item.id === newItem.id);
+      if (!existingItem) {
+        state.items.push(newItem);
+      } else {
+        existingItem.quantity += newItem.quantity;
+      }
 
-      state.items.push(newItem);
+      state.totalPrice += parseFloat(newItem.price) * newItem.quantity;
     },
 
     removeItem: (state, action: PayloadAction<number>) => {

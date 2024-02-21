@@ -10,7 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({ children, className, isLoading, onClick }: ButtonProps) => {
   const buttonClass = cn(
-    'flex flex-1 items-center justify-center rounded-xl bg-blue-500 px-4 py-2 text-white transition-all duration-100',
+    'flex flex-1 items-center justify-center rounded-xl bg-blue-500 px-4 py-2 text-white transition-all duration-100 shadow-lg',
     isLoading ? 'cursor-not-allowed opacity-50' : 'hover:bg-blue-700',
     className,
   );

@@ -1,9 +1,12 @@
 import { ItemModel } from '@/models/item.model';
 import Quantity from './quantity';
+import { useAppSelector } from '@/hooks/store-hooks';
 
 interface CartItemProps extends ItemModel {}
 
-const CartItem = ({ title, shortDescription, price }: CartItemProps) => {
+const CartItem = ({ id, title, shortDescription, price }: CartItemProps) => {
+  const items = useAppSelector((state) => state.cart.items);
+
   const formattedPrice = parseFloat(price).toFixed(2);
 
   return (
