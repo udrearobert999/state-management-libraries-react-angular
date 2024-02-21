@@ -27,9 +27,14 @@ const CartPage = () => {
       ) : (
         <p>The cart is empty :(</p>
       )}
-      <Button onClick={handleBack} className="w-3/12">
-        Back
-      </Button>
+      <div className="flex w-full flex-col items-center justify-center gap-4">
+        {itemsInCart.length > 0 && (
+          <Button className="w-3/12 bg-red-600 hover:bg-red-700">Clear</Button>
+        )}
+        <Button onClick={handleBack} className="w-3/12">
+          Back
+        </Button>
+      </div>
     </div>
   );
 };
