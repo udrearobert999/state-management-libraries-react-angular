@@ -1,3 +1,4 @@
+import { useAppSelector } from '@/hooks/store-hooks';
 import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
 interface ShoppingButtonProps {
@@ -5,6 +6,8 @@ interface ShoppingButtonProps {
 }
 
 const ShoppingButton = ({ onClick }: ShoppingButtonProps) => {
+  const cartSize = useAppSelector((state) => state.cart.items.length);
+
   return (
     <div
       onClick={onClick}
@@ -13,9 +16,11 @@ const ShoppingButton = ({ onClick }: ShoppingButtonProps) => {
       <div className="p-4">
         <ShoppingCartIcon className="h-6 w-6" />
       </div>
-      <div className="absolute right-[4px] top-[8px] flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-xs text-white shadow-sm">
-        1
-      </div>
+      {cartSize > 0 && (
+        <div className="absolute right-[4px] top-[8px] flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-xs text-white shadow-sm">
+          {cartSize}
+        </div>
+      )}
     </div>
   );
 };
