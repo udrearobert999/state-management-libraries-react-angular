@@ -17,7 +17,7 @@ const Button = ({ children, className, isLoading, onClick }: ButtonProps) => {
 
   return (
     <button disabled={isLoading} onClick={onClick} className={buttonClass}>
-      {isLoading ? <Spinner className="fill-gray-200" /> : children}
+      {isLoading ? <Spinner /> : children}
     </button>
   );
 };

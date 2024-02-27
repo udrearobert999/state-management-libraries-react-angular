@@ -5,6 +5,11 @@ interface ItemWithQuantity extends ItemModel {
   quantity: number;
 }
 
+interface ChangeQuantity {
+  id: number;
+  quantity: number;
+}
+
 interface CartState {
   items: ItemWithQuantity[];
   totalPrice: number;
@@ -28,15 +33,32 @@ const cartSlice = createSlice({
         existingItem.quantity += newItem.quantity;
       }
 
-      state.totalPrice += parseFloat(newItem.price) * newItem.quantity;
+      state.totalPrice += newItem.price * newItem.quantity;
+    },
+
+    changeItemQuantity: (state, action: PayloadAction<ChangeQuantity>) => {
+      const { id, quantity } = action.payload;
+      const existingItem = state.items.find((item) => item.id === id);
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        state.totalPrice += quantity * existingItem.price;
+      }
     },
 
     removeItem: (state, action: PayloadAction<number>) => {
-      console.log(state, action);
+      const id = action.payload;
+
+      const item = state.items.find((item) => item.id === id);
+      const itemPrice = item?.price || 0;
+
+      state.items = state.items.filter((item) => item.id !== id);
+      state.totalPrice -= itemPrice;
     },
 
     clear: (state) => {
       state.items = [];
+      state.totalPrice = 0;
     },
   },
 });

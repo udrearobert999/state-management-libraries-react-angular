@@ -1,22 +1,17 @@
 import { ItemModel } from '@/models/item.model';
 import Button from './button';
 import Quantity from './quantity';
-import { useRef } from 'react';
+import { useState } from 'react';
 
 interface ItemProps extends ItemModel {
   onAddToCart: (quantity: number) => void;
 }
 
-const Item = ({ title, description, price, onAddToCart }: ItemProps) => {
-  const formattedPrice = parseFloat(price).toFixed(2);
-
-  const quantityRef = useRef<HTMLInputElement>(null);
+const Item = ({ id, title, description, price, onAddToCart }: ItemProps) => {
+  const [quantity, setQuantity] = useState<number>(1);
 
   const handleClick = () => {
-    if (quantityRef.current) {
-      const quantity = Number(quantityRef.current.value);
-      onAddToCart(quantity);
-    }
+    onAddToCart(quantity);
   };
 
   return (
@@ -27,9 +22,9 @@ const Item = ({ title, description, price, onAddToCart }: ItemProps) => {
       <div className="flex-1">
         <p>{description}</p>
       </div>
-      <p className="text-center text-2xl font-bold">$ {formattedPrice}</p>
+      <p className="text-center text-2xl font-bold">$ {price.toFixed(2)}</p>
       <div className="flex w-full gap-4">
-        <Quantity ref={quantityRef} />
+        <Quantity itemId={id} quantity={quantity} setQuantity={setQuantity} />
         <Button onClick={handleClick}>Add</Button>
       </div>
     </div>

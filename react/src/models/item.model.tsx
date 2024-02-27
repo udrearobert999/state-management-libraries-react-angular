@@ -3,6 +3,6 @@ export interface ItemModel {
   title: string;
   description: string;
   shortDescription: string;
-  price: string;
+  price: number;
   quantity?: number;
 }

@@ -20,10 +20,9 @@ const CartPage = () => {
     dispatch(cartActions.clear());
   };
 
-  return (
-    <div className="mt-16 flex flex-col items-center justify-center gap-16 py-6">
-      <p className="text-4xl font-bold">Cart Items</p>
-      {itemsInCart.length > 0 ? (
+  const renderItems = () => {
+    if (itemsInCart.length > 0)
+      return (
         <div className="w-full max-w-3xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
           <div className="flex flex-1 flex-col gap-6">
             {itemsInCart.map((item) => (
@@ -32,18 +31,31 @@ const CartPage = () => {
           </div>
           <Checkout totalPrice={totalPrice} />
         </div>
-      ) : (
-        <p>The cart is empty!</p>
-      )}
+      );
+
+    return <p>The cart is empty!</p>;
+  };
+
+  const renderClearButton = () => {
+    if (itemsInCart.length > 0)
+      return (
+        <Button
+          onClick={handleClear}
+          className="w-3/12 bg-red-600 hover:bg-red-700"
+        >
+          Clear
+        </Button>
+      );
+
+    return null;
+  };
+
+  return (
+    <div className="mt-16 flex flex-col items-center justify-center gap-16 py-6">
+      <p className="text-4xl font-bold">Cart Items</p>
+      {renderItems()}
       <div className="flex w-full flex-col items-center justify-center gap-4">
-        {itemsInCart.length > 0 && (
-          <Button
-            onClick={handleClear}
-            className="w-3/12 bg-red-600 hover:bg-red-700"
-          >
-            Clear
-          </Button>
-        )}
+        {renderClearButton()}
         <Button onClick={handleBack} className="w-3/12">
           Back
         </Button>

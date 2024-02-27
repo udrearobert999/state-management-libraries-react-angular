@@ -22,7 +22,7 @@ const SuccessPage = () => {
         transition={{ duration: 1 }}
       />
       <CheckMark progress={progress} />
-      <p>You will be redirected...</p>
+      <p>Order sent! You will be redirected...</p>
       <p>
         If not,{' '}
         <NavLink to="/" className="text-blue-500 hover:text-blue-700">

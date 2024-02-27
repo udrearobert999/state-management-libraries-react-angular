@@ -1,11 +1,11 @@
 import { useAppSelector } from '@/hooks/store-hooks';
 import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
-interface ShoppingButtonProps {
+interface ShoppingCartButtonProps {
   onClick: () => void;
 }
 
-const ShoppingButton = ({ onClick }: ShoppingButtonProps) => {
+const ShoppingCartButton = ({ onClick }: ShoppingCartButtonProps) => {
   const cartSize = useAppSelector((state) => state.cart.items.length);
 
   return (
@@ -25,4 +25,4 @@ const ShoppingButton = ({ onClick }: ShoppingButtonProps) => {
   );
 };
 
-export default ShoppingButton;
+export default ShoppingCartButton;

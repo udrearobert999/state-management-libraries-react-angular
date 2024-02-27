@@ -25,14 +25,12 @@ const Checkout = ({ totalPrice }: CheckoutProps) => {
 
   const shippingPrice = 4.99;
   const fullPrice = shippingPrice + totalPrice;
-  const totalPriceFormatted = totalPrice.toFixed(2);
-  const fullPriceFormatted = fullPrice.toFixed(2);
 
   return (
     <div className="mt-6 h-full rounded-xl bg-zinc-700 p-6 text-white shadow-md hover:shadow-2xl md:mt-0 md:w-1/3">
       <div className="mb-2 flex justify-between ">
         <p>Subtotal</p>
-        <p>${totalPriceFormatted}</p>
+        <p>${totalPrice.toFixed(2)}</p>
       </div>
       <div className="flex justify-between">
         <p>Shipping</p>
@@ -42,7 +40,7 @@ const Checkout = ({ totalPrice }: CheckoutProps) => {
       <div className="flex justify-between">
         <p className="text-lg font-bold">Total</p>
         <div className="">
-          <p className="mb-1 text-lg font-bold">${fullPriceFormatted} USD</p>
+          <p className="mb-1 text-lg font-bold">${fullPrice.toFixed(2)} USD</p>
           <p className="text-sm text-gray-700">including VAT</p>
         </div>
       </div>
